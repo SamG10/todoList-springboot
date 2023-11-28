@@ -21,8 +21,8 @@ public class TodoListController {
     }
 
     @GetMapping
-    public List<Todo> findAll() {
-        return todoListService.findAllTodo();
+    public List<Todo> findAll(@RequestParam(required = false, defaultValue = "") String status) {
+        return todoListService.findAllTodo(status);
     };
 
     @GetMapping("/{id}")

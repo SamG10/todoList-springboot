@@ -1,13 +1,10 @@
 package com.example.springtodolist2.services;
 
-import com.example.springtodolist2.dto.TodoDto;
 import com.example.springtodolist2.models.Todo;
 import com.example.springtodolist2.respositories.TodoListRespository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,8 +21,14 @@ public class TodoListService implements ITodoListService {
     }
 
     @Override
-    public List<Todo> findAllTodo() {
-        return todoListRespository.findAll();
+    public List<Todo> findAllTodo(String status) {
+        if(status.isEmpty()) {
+            return todoListRespository.findAll();
+        }
+
+        return  todoListRespository.findAllByStatus(
+                status
+        );
     }
 
     @Override
